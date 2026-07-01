@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Welcome Back 👋</h2>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <hr>
+
+  <button onclick="googleLogin()" class="google-btn">
+    Continue with Google
+  </button>
+
+  <hr>
+
+  <button onclick="window.location.href='phone.html'">
+    Login with Phone
+  </button>
+
+  <button onclick="window.location.href='register.html'">
+    Create Account
+  </button>
+
+  <p id="result"></p>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA0tldlLxPTMBa4fMv5JLeGa026b4BFel8",
+  authDomain: "crud-b4007.firebaseapp.com",
+  projectId: "crud-b4007",
+  appId: "1:1076521919207:web:dff203d373afb2233ff842"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// 🔐 EMAIL LOGIN
+window.login = async function () {
+  try {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+
+    const token = await userCred.user.getIdToken();
+    localStorage.setItem("token", token);
+
+    document.getElementById("result").innerText = "Login Success ✅";
+
+    window.location.href = "index.html";
+
+  } catch (err) {
+    document.getElementById("result").innerText = err.message;
+  }
+};
+
+// 🔵 GOOGLE LOGIN
+window.googleLogin = async function () {
+  try {
+    const provider = new GoogleAuthProvider();
+
+    const result = await signInWithPopup(auth, provider);
+
+    const token = await result.user.getIdToken();
+    localStorage.setItem("token", token);
+
+    window.location.href = "index.html";
+
+  } catch (err) {
+    document.getElementById("result").innerText = err.message;
+  }
+};
+
+</script>
+
+</body>
+</html>

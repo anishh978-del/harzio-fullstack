@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Security Dashboard</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      color: #1f2937;
+    }
+
+    .navbar {
+      background: #111827;
+      color: white;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar h2 {
+      margin: 0;
+    }
+
+    .navbar button {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .dashboard {
+      padding: 30px 40px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #6b7280;
+      font-size: 15px;
+    }
+
+    .card p {
+      margin: 10px 0 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .green {
+      color: #16a34a;
+    }
+
+    .orange {
+      color: #ea580c;
+    }
+
+    .red {
+      color: #dc2626;
+    }
+
+    .blue {
+      color: #2563eb;
+    }
+
+    .section {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background: #f9fafb;
+    }
+
+    .status {
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .safe {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .warning {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 15px;
+      }
+
+      .dashboard {
+        padding: 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <h2>Dashboard</h2>
+    <button onclick="logoutUser()">Logout</button>
+  </div>
+
+  <main class="dashboard">
+    <div class="welcome">
+      <h1>Welcome, Employee</h1>
+      <p>Here is your security dashboard summary.</p>
+    </div>
+  </main>
+
+<script>
+  function goToLogin() {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "index.html";
+  }
+</script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import {
+    getAuth,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBbNC4rsvEiDtO7TROvB2F_pHmWWl6QObc",
+    authDomain: "harzo2.firebaseapp.com",
+    projectId: "harzo2",
+    storageBucket: "harzo2.firebasestorage.app",
+    messagingSenderId: "583358368515",
+    appId: "1:583358368515:web:b04ee8bb210c65af983736",
+    measurementId: "G-65HW7JSX96"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.logoutUser = async function () {
+    await signOut(auth);
+    window.location.href = "index.html";
+  };
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Register</h2>
+
+  <input type="email" id="regEmail" placeholder="Email">
+  <input type="password" id="regPassword" placeholder="Password">
+  <input type="password" id="regConfirmPassword" placeholder="Confirm Password">
+
+  <button onclick="register()">Register</button>
+
+  <p id="regResult"></p>
+
+  <p>
+    Already have account?
+    <a href="login.html">Login</a>
+  </p>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA0tldlLxPTMBa4fMv5JLeGa026b4BFel8",
+  authDomain: "crud-b4007.firebaseapp.com",
+  projectId: "crud-b4007",
+  storageBucket: "crud-b4007.appspot.com",
+  messagingSenderId: "1076521919207",
+  appId: "1:1076521919207:web:dff203d373afb2233ff842"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ==========================
+// 🔐 REGISTER FUNCTION
+// ==========================
+window.register = async function () {
+  const email = document.getElementById("regEmail").value;
+  const password = document.getElementById("regPassword").value;
+  const confirmPassword = document.getElementById("regConfirmPassword").value;
+
+  const resultBox = document.getElementById("regResult");
+
+  // ❌ check empty fields
+  if (!email || !password || !confirmPassword) {
+    resultBox.innerText = "Please fill all fields ❌";
+    return;
+  }
+
+  // ❌ password match check
+  if (password !== confirmPassword) {
+    resultBox.innerText = "Passwords do not match ❌";
+    return;
+  }
+
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+
+    resultBox.innerText = "Registered Successfully ✅";
+
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1200);
+
+  } catch (error) {
+    resultBox.innerText = error.message;
+  }
+};
+</script>
+
+</body>
+</html>

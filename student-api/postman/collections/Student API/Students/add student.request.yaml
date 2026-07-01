@@ -1,0 +1,21 @@
+$kind: http-request
+name: Add Student
+method: POST
+url: '{{base_url}}/api/students'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{token}}'
+body:
+  type: json
+  content: |-
+    {
+      "name": "John Doe",
+      "age": 20,
+      "grade": "A"
+    }

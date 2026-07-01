@@ -1,0 +1,10 @@
+$kind: collection
+name: Student API
+description: |-
+  API collection for the Student API project. Includes authentication (register/login) and protected student management endpoints.
+variables:
+  - key: base_url
+    value: 'http://localhost:5000'
+  - key: token
+    value: ''
+    description: JWT token obtained after login

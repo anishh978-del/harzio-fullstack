@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Login Portal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div id="registerBox">
+      <h1>Employee Register</h1>
+
+      <input type="email" id="registerEmail" placeholder="Employee email" />
+      <input type="password" id="registerPassword" placeholder="Create password" />
+
+      <button onclick="registerUser()">Register</button>
+
+      <div class="link" onclick="showLogin()">Already have an account? Login</div>
+      <div id="registerMessage" class="message"></div>
+    </div>
+
+    <div id="loginBox" class="hidden">
+      <h1>Employee Login</h1>
+
+      <input type="email" id="loginEmail" placeholder="Employee email" />
+      <input type="password" id="loginPassword" placeholder="Password" />
+
+      <button onclick="loginUser()">Login</button>
+
+      <button class="google-btn" onclick="loginWithGoogle()">
+        <img
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          alt="Google logo"
+        />
+        Login with Google
+      </button>
+
+      <div class="link" onclick="showRegister()">New employee? Register</div>
+      <div id="loginMessage" class="message"></div>
+    </div>
+
+    <div id="dashboardBox" class="hidden dashboard">
+      <h1>Dashboard</h1>
+      <h2>Welcome Employee</h2>
+      <p>You are logged in successfully.</p>
+      <p id="employeeEmail"></p>
+
+      <button class="logout" onclick="logoutUser()">Logout</button>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
